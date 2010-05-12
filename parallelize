@@ -25,4 +25,3 @@ while files:
 
 [process.wait() for process in queue]
 
-print "done"
