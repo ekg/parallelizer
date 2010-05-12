@@ -1,0 +1,28 @@
+#!/usr/bin/python
+
+import subprocess
+import sys
+import time
+
+if len(sys.argv) == 1:
+    print "Usage:", sys.argv[0], " [command] [thread count] [files]"
+    print "apply [command] individually to [files] in parallel using no more than [thread count] processes"
+    exit()
+
+command = sys.argv[1]
+thread_count = int(sys.argv[2])
+files = sys.argv[3:]
+
+queue = []
+
+while files:
+    while files and len(queue) <= thread_count:
+        file = files.pop(0)
+        print command, file
+        queue.append(subprocess.Popen([command, file]))
+    queue = [process for process in queue if process.poll() is None]
+    time.sleep(0.1)
+
+[process.wait() for process in queue]
+
+print "done"
