@@ -7,6 +7,8 @@ import time
 if len(sys.argv) == 1:
     print "Usage:", sys.argv[0], " [command] [thread count] [files]"
     print "apply [command] individually to [files] in parallel using no more than [thread count] processes"
+    print "Note: multi-word commands must be put in quotes:"
+    print "e.g. ./parallelize 'head -1' 2 *.txt"
     exit()
 
 command = sys.argv[1]
