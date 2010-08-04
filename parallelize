@@ -18,7 +18,7 @@ files = sys.argv[3:]
 queue = []
 
 while files:
-    while files and len(queue) <= thread_count:
+    while files and len(queue) < thread_count:
         file = files.pop(0)
         print command, file
         cmd = command.split(' ')
